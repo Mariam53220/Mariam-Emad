@@ -37,7 +37,7 @@
                   $number1 = $_POST['num'];
                   $root = $_POST['root'];
 
-                  echo  pow($number1, 1/$root);
+                  echo  $number1 ** 1/$root;
 
                   ?>
 
