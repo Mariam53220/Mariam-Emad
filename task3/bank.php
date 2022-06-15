@@ -1,7 +1,7 @@
 <?php 
 
 if ($_POST) {
-
+  
 
     $Name = $_POST['name'];
     $Amount = $_POST['amount'];
