@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2022 at 04:41 AM
+-- Generation Time: Jun 20, 2022 at 01:10 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.19
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -230,7 +230,7 @@ CREATE TABLE `products` (
   `desc_en` longtext NOT NULL,
   `desc_ar` longtext NOT NULL,
   `brand_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `subcategory_id` bigint(20) NOT NULL,
+  `subcategory_id` bigint(20) UNSIGNED NOT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
@@ -274,7 +274,7 @@ CREATE TABLE `reviews` (
 --
 
 CREATE TABLE `subcategories` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name_en` varchar(32) NOT NULL,
   `name_ar` varchar(32) NOT NULL,
   `status` tinyint(1) DEFAULT 1 COMMENT '1=> active, 0=> not active',
@@ -517,7 +517,7 @@ ALTER TABLE `regions`
 -- AUTO_INCREMENT for table `subcategories`
 --
 ALTER TABLE `subcategories`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -581,8 +581,8 @@ ALTER TABLE `order_product`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_brands_fk` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`subcategory_id`) REFERENCES `subcategories` (`id`),
-  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
+  ADD CONSTRAINT `products_ibfk_3` FOREIGN KEY (`subcategory_id`) REFERENCES `subcategories` (`id`);
 
 --
 -- Constraints for table `regions`
