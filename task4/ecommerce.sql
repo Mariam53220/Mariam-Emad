@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2022 at 01:10 AM
+-- Generation Time: Jun 20, 2022 at 09:46 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -83,8 +83,8 @@ CREATE TABLE `brands` (
 --
 
 CREATE TABLE `carts` (
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `product_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
   `quantity` tinyint(2) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -259,8 +259,8 @@ CREATE TABLE `regions` (
 --
 
 CREATE TABLE `reviews` (
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `product_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
   `rate` tinyint(1) NOT NULL DEFAULT 0,
   `comment` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -335,6 +335,7 @@ ALTER TABLE `brands`
 -- Indexes for table `carts`
 --
 ALTER TABLE `carts`
+  ADD PRIMARY KEY (`user_id`,`product_id`) USING BTREE,
   ADD KEY `user_id` (`user_id`),
   ADD KEY `carts_ibfk_1` (`product_id`);
 
@@ -362,7 +363,7 @@ ALTER TABLE `coupons`
 -- Indexes for table `favs`
 --
 ALTER TABLE `favs`
-  ADD PRIMARY KEY (`product_id`),
+  ADD PRIMARY KEY (`product_id`,`usr_id`) USING BTREE,
   ADD KEY `usr_id` (`usr_id`);
 
 --
@@ -413,6 +414,7 @@ ALTER TABLE `regions`
 -- Indexes for table `reviews`
 --
 ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`user_id`,`product_id`) USING BTREE,
   ADD KEY `user_id` (`user_id`),
   ADD KEY `product_id` (`product_id`);
 
